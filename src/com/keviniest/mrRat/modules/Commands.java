@@ -47,10 +47,10 @@ public class Commands extends ListenerAdapter {
 					`info ... Info about the bot`
 					`eatcheese ... Eats a cheese`
 					`prefix ... see current prefix`
-					`aiaoy <parameter> ... does some fun stuff`
-					`gayr8 ... Uses mings built-in line-callibrated Gaydar`
-					`setprefix <new prefix> ... changes bot prefi`
-					`rsg <action> <type> <word> ... use crowdsourcing to generate ramdom sentence`
+					`aiaoy <parameter> ... webserver`
+					`gayr8 ... rng with some random words`
+					`setprefix <new prefix> ... changes bot prefix`
+					`rsg <action> <type> <word> ... use crowd sourcing to generate random sentence`
 					`For more info, check out` https://docs.google.com/document/d/1EfEFHPe7GSXM0OQ7xJ2NwToQv69DmAdN0vl8GHIw1_I/edit?usp=sharing\s
 					""").queue();
 			
