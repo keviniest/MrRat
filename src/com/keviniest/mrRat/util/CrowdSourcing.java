@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,7 +20,7 @@ public class CrowdSourcing {
 	private static final File OBJS_LIST = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\resources\\MrRat\\data\\objs.csv");
 
 	/**
-	 * Adds a word to the arraylist.
+	 * Saves words to corresponding CSV file.
 	 *
 	 * @param type type of the word (subj, verb, obj)
 	 * @param word the actual word to be added
