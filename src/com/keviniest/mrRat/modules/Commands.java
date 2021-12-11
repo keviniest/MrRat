@@ -26,7 +26,7 @@ public class Commands extends ListenerAdapter {
 			info.setTitle("🧀MrRat🐀");
 			info.addField("Creator", "Keviniest#9805", true);
 			info.addField("How to get help", "Ask the creator", true);
-			info.addField("third field", "description here", true);
+			info.addField("Source Code", "https://github.com/keviniest/MrRat", true);
 			info.addField("forth field", "description here", true);
 			info.setDescription("Cheese bot that cheese");
 			info.setThumbnail("https://cdn.discordapp.com/attachments/831478153716432930/880352202764472320/01-rat-friends-nationalgeographic_1162144.png");
