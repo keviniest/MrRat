@@ -20,7 +20,7 @@ public class CrowdSourcing {
 	private static final File OBJS_LIST = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\resources\\MrRat\\data\\objs.csv");
 
 	/**
-	 * Saves words to corresponding CSV file.
+	 * Saves words to corresponding CSV file
 	 *
 	 * @param type type of the word (subj, verb, obj)
 	 * @param word the actual word to be added
