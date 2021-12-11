@@ -9,8 +9,8 @@ import javax.security.auth.login.LoginException;
 
 import com.keviniest.mrRat.modules.Commands;
 import com.keviniest.mrRat.modules.MemberJoin;
-
 import com.keviniest.mrRat.modules.Repeat;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;

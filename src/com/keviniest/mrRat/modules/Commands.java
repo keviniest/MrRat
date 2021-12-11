@@ -1,5 +1,6 @@
 package com.keviniest.mrRat.modules;
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 import com.keviniest.mrRat.MrRat;
@@ -19,7 +20,6 @@ public class Commands extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		Random rand = new Random();
-		CrowdSourcing cs = new CrowdSourcing();
 
 		if(args[0].equalsIgnoreCase(MrRat.prefix + "info")) {
 			EmbedBuilder info = new EmbedBuilder();
@@ -92,18 +92,11 @@ public class Commands extends ListenerAdapter {
 				event.getChannel().sendMessage("Word Added!").queue();
 			} 
 			else if(args[1].equalsIgnoreCase("print")) {
-				event.getChannel().sendMessage(cs.randomSentence()).queue();
-			}
-			else if(args[1].equalsIgnoreCase("list")) {
-				event.getChannel().sendMessage(CrowdSourcing.subj + "\n" + CrowdSourcing.verbs + "\n" + CrowdSourcing.objs).queue();
-			} 
-			else if(args[1].equalsIgnoreCase("rm")) {
-				CrowdSourcing.remove(args[2], Integer.parseInt(args[3]), event.getAuthor());
-				event.getChannel().sendMessage("Word Removed!").queue();
-			} 
-			else if(args[1].equalsIgnoreCase("set")) {
-				CrowdSourcing.set(args[2], Integer.parseInt(args[3]), args[4], event.getAuthor());
-				event.getChannel().sendMessage("Word Changed!").queue();
+				try {
+					event.getChannel().sendMessage(CrowdSourcing.randomSentence()).queue();
+				} catch (FileNotFoundException e) {
+					event.getChannel().sendMessage(e.toString()).queue();
+				}
 			}
 			else {
 				event.getChannel().sendMessage("❌Invalid option fed, check https://docs.google.com/document/d/1EfEFHPe7GSXM0OQ7xJ2NwToQv69DmAdN0vl8GHIw1_I/edit?usp=sharing").queue();
