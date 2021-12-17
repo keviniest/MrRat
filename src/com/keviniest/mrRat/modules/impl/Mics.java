@@ -1,16 +1,14 @@
-package com.keviniest.mrRat.modules;
+package com.keviniest.mrRat.modules.impl;
 
-import java.io.FileNotFoundException;
 import java.util.Random;
 
 import com.keviniest.mrRat.MrRat;
-import com.keviniest.mrRat.util.CrowdSourcing;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class Commands extends ListenerAdapter {
+public class Mics extends ListenerAdapter {
 	
 	public static final char invisibleCharacter = '⠀'; //This is here so the bot doesn't trigger to itself
 	public static long cheeseAte = 0;
@@ -85,22 +83,6 @@ public class Commands extends ListenerAdapter {
 		else if(args[0].equals(MrRat.prefix + "gayr8")) {
 			int howGay = rand.nextInt(100);
 			event.getChannel().sendMessage((args[1].isBlank()) ? "Usage : ~gayr8 <user>" : args[1] + " is " + howGay + "% gay" + ":rainbow_flag:").queue();
-		} 
-		else if(args[0].equalsIgnoreCase(MrRat.prefix + "rsg")) {
-			if(args[1].equalsIgnoreCase("add")) {
-				CrowdSourcing.add(args[2], args[3], event.getAuthor());
-				event.getChannel().sendMessage("Word Added!").queue();
-			} 
-			else if(args[1].equalsIgnoreCase("print")) {
-				try {
-					event.getChannel().sendMessage(CrowdSourcing.randomSentence()).queue();
-				} catch (FileNotFoundException e) {
-					event.getChannel().sendMessage(e.toString()).queue();
-				}
-			}
-			else {
-				event.getChannel().sendMessage("❌Invalid option fed, check https://docs.google.com/document/d/1EfEFHPe7GSXM0OQ7xJ2NwToQv69DmAdN0vl8GHIw1_I/edit?usp=sharing").queue();
-			}
 		}
 	}
 }

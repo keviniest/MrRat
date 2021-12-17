@@ -1,4 +1,4 @@
-package com.keviniest.mrRat.modules;
+package com.keviniest.mrRat.modules.impl;
 
 import java.util.Random;
 
@@ -22,12 +22,12 @@ public class MemberJoin extends ListenerAdapter {
 		int number = rand.nextInt(joinMessage.length);
 		
 		EmbedBuilder join = new EmbedBuilder();
-		join.setColor(Commands.embedColor);
+		join.setColor(Mics.embedColor);
 		join.setDescription(joinMessage[number].replace("[member]", event.getMember().getAsMention()));
 		
 		event.getGuild().getDefaultChannel().sendMessage(join.build()).queue();
 		
-		//String message = joinMessage[number].replace("[member]", event.getMember().getAsMention());
-		//event.getGuild().getDefaultChannel().sendMessage(message);
+		String message = joinMessage[number].replace("[member]", event.getMember().getAsMention());
+		event.getGuild().getDefaultChannel().sendMessage(message);
 	}
 }

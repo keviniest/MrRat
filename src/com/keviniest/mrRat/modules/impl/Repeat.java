@@ -1,4 +1,4 @@
-package com.keviniest.mrRat.modules;
+package com.keviniest.mrRat.modules.impl;
 
 import com.keviniest.mrRat.MrRat;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import net.dv8tion.jda.api.entities.User;
 
-public class CrowdSourcing {
+public class CrowdSourcingUtil {
 
 	public static Random random = new Random();
 	public static FileWriter writer;
