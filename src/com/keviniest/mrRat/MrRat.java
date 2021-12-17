@@ -29,7 +29,7 @@ public class MrRat {
 		
 		jda.addEventListener(new Commands());
 		jda.addEventListener(new MemberJoin());
-		jda.addEventListener(new Repeat());
+		//jda.addEventListener(new Repeat());
 
 		Commands.cheeseAte = 0;
 	}

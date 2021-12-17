@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -65,7 +66,12 @@ public class CrowdSourcing {
 		boolean extended = random.nextBoolean();
 		boolean isPrep = extended && random.nextBoolean();
 
-		String sentence = readCSV(NOUNS_LIST, random.nextInt(NOUNS_LIST.toString().split(",").length))
+		//First word in sentence is capitalized logic
+		StringBuilder firstWord = new StringBuilder(readCSV(NOUNS_LIST, random.nextInt(NOUNS_LIST.toString().split(",").length)));
+		String firstLetter = firstWord.toString().split("")[0].toUpperCase();
+		firstWord = new StringBuilder(firstLetter + firstWord.delete(0, 1));
+
+		String sentence = firstWord
 				+ " "
 				+ readCSV(VERBS_LIST, random.nextInt(VERBS_LIST.toString().split(",").length))
 				+ " "
