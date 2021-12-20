@@ -15,6 +15,11 @@ public class CommandGayr8 extends Command {
     public void onCommand(String[] args, String command) {
         Random rand = new Random();
         int howGay = rand.nextInt(100);
-        CommandManager.event.getChannel().sendMessage(":rainbow_flag:  You are " + howGay + "% gay.:rainbow:").queue();
+
+        if(args.length == 0) {
+            CommandManager.event.getChannel().sendMessage("You are " + howGay + "% gay.:rainbow_flag: ").queue();
+        } else {
+            CommandManager.event.getChannel().sendMessage(args[0]  + " is " + howGay + "% gay.:rainbow_flag: ").queue();
+        }
     }
 }

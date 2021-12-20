@@ -21,9 +21,9 @@ public class MrRat {
 
 	public static void main(String[] args) throws LoginException, IOException {
 		
-		jda = JDABuilder.createDefault(MrRat.readToken()).build(); //Nice try.
+		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
-		jda.getPresence().setPresence(Activity.playing("~help | ~info"), true);
+		jda.getPresence().setPresence(Activity.playing("~info"), true);
 		
 		jda.addEventListener(new CommandManager());
 	}
