@@ -7,10 +7,7 @@ import java.util.Scanner;
 
 import javax.security.auth.login.LoginException;
 
-import com.keviniest.mrRat.modules.impl.Mics;
-import com.keviniest.mrRat.modules.impl.CrowdSourcing;
-import com.keviniest.mrRat.modules.impl.MemberJoin;
-import com.keviniest.mrRat.modules.impl.Repeat;
+import com.keviniest.mrRat.commands.CommandManager;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -26,14 +23,9 @@ public class MrRat {
 		
 		jda = JDABuilder.createDefault(MrRat.readToken()).build(); //Nice try.
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
-		jda.getPresence().setPresence(Activity.playing("~help"), true);
+		jda.getPresence().setPresence(Activity.playing("~help | ~info"), true);
 		
-		jda.addEventListener(new Mics());
-		jda.addEventListener(new MemberJoin());
-		jda.addEventListener(new Repeat());
-		jda.addEventListener(new CrowdSourcing());
-
-		Mics.cheeseAte = 0;
+		jda.addEventListener(new CommandManager());
 	}
 	
 	private static String readToken() throws FileNotFoundException {
@@ -45,6 +37,5 @@ public class MrRat {
 		}
 		scanner.close();
 		return token;
-		
 	}
 }
