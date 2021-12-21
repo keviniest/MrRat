@@ -9,6 +9,8 @@ import javax.security.auth.login.LoginException;
 
 import com.keviniest.mrRat.commands.CommandManager;
 
+import com.keviniest.mrRat.events.GuildJoin;
+import com.keviniest.mrRat.events.MemberJoin;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -23,9 +25,11 @@ public class MrRat {
 		
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
-		jda.getPresence().setPresence(Activity.playing("~info"), true);
+		jda.getPresence().setPresence(Activity.playing("cheese🧀"), true);
 		
 		jda.addEventListener(new CommandManager());
+		jda.addEventListener(new GuildJoin());
+		jda.addEventListener(new MemberJoin());
 	}
 	
 	private static String readToken() throws FileNotFoundException {
