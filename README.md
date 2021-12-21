@@ -1,2 +1,2 @@
 # MrRat
-MrRat the disord bot
+MrRat the Disord Bot
