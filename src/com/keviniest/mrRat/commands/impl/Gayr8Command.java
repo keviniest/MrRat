@@ -5,9 +5,9 @@ import com.keviniest.mrRat.commands.CommandManager;
 
 import java.util.Random;
 
-public class CommandGayr8 extends Command {
+public class Gayr8Command extends Command {
 
-    public CommandGayr8() {
+    public Gayr8Command() {
         super("gayr8");
     }
 

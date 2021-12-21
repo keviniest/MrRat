@@ -4,9 +4,9 @@ import com.keviniest.mrRat.commands.Command;
 import com.keviniest.mrRat.commands.CommandManager;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-public class CommandInfo extends Command {
+public class InfoCommand extends Command {
 
-    public CommandInfo() {
+    public InfoCommand() {
         super("info");
     }
 

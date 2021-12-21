@@ -17,13 +17,13 @@ public class CommandManager extends ListenerAdapter {
     public static long cheeseAte = 0L;
 
     public CommandManager() {
-        commands.add(new CommandRSG());
-        commands.add(new CommandHelp());
-        commands.add(new CommandGayr8());
-        commands.add(new CommandInfo());
-        commands.add(new CommandEatCheese());
-        commands.add(new CommandPrefix());
-        commands.add(new CommandSetPrefix());
+        commands.add(new RSGCommand());
+        commands.add(new HelpCommand());
+        commands.add(new Gayr8Command());
+        commands.add(new InfoCommand());
+        commands.add(new EatCheeseCommand());
+        commands.add(new PrefixCommand());
+        commands.add(new SetPrefixCommand());
     }
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent e) {

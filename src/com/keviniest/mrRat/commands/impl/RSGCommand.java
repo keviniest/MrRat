@@ -6,9 +6,9 @@ import com.keviniest.mrRat.util.CrowdSourcingUtil;
 
 import java.io.FileNotFoundException;
 
-public class CommandRSG extends Command {
+public class RSGCommand extends Command {
 
-    public CommandRSG() {
+    public RSGCommand() {
         super("rsg");
     }
 

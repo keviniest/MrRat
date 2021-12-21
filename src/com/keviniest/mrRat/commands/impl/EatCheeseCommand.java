@@ -3,10 +3,10 @@ package com.keviniest.mrRat.commands.impl;
 import com.keviniest.mrRat.commands.Command;
 import com.keviniest.mrRat.commands.CommandManager;
 
-public class CommandEatCheese extends Command {
+public class EatCheeseCommand extends Command {
 
 
-    public CommandEatCheese() {
+    public EatCheeseCommand() {
         super("eatcheese");
     }
 

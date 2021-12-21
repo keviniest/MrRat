@@ -4,9 +4,9 @@ import com.keviniest.mrRat.MrRat;
 import com.keviniest.mrRat.commands.Command;
 import com.keviniest.mrRat.commands.CommandManager;
 
-public class CommandPrefix extends Command {
+public class PrefixCommand extends Command {
 
-    public CommandPrefix() {
+    public PrefixCommand() {
         super("prefix");
     }
 

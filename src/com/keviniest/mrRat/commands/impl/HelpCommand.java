@@ -3,9 +3,9 @@ package com.keviniest.mrRat.commands.impl;
 import com.keviniest.mrRat.commands.Command;
 import com.keviniest.mrRat.commands.CommandManager;
 
-public class CommandHelp extends Command {
+public class HelpCommand extends Command {
 
-    public CommandHelp() {
+    public HelpCommand() {
         super("help");
     }
 
