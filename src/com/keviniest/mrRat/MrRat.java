@@ -20,9 +20,18 @@ public class MrRat {
 
 	public static StringBuffer prefix = new StringBuffer("~");
 	public static JDA jda;
+	public static boolean debug;
 
 	public static void main(String[] args) throws LoginException, IOException {
-		
+
+		if(args.length == 1) {
+			debug = args[0].equalsIgnoreCase("debug");
+		} else {
+			debug = false;
+		}
+
+		System.out.print((debug) ? "App started with debug mode\n" : "");
+
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setPresence(Activity.playing("cheese🧀"), true);

