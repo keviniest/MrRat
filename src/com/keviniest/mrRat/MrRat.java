@@ -11,6 +11,7 @@ import com.keviniest.mrRat.commands.CommandManager;
 
 import com.keviniest.mrRat.events.GuildJoin;
 import com.keviniest.mrRat.events.MemberJoin;
+import com.keviniest.mrRat.util.CrowdSourcingUtil;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -35,7 +36,8 @@ public class MrRat {
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setPresence(Activity.playing("cheese🧀"), true);
-		
+
+		CrowdSourcingUtil.init();
 		jda.addEventListener(new CommandManager());
 		jda.addEventListener(new GuildJoin());
 		jda.addEventListener(new MemberJoin());
@@ -43,8 +45,9 @@ public class MrRat {
 	
 	private static String readToken() throws FileNotFoundException {
 		String token = "";
-		File file = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\token.txt");
-		Scanner scanner = new Scanner(file);
+		String file = new File("").getAbsolutePath();
+		file = file.concat("\\token.txt");
+		Scanner scanner = new Scanner(new File(file));
 		while(scanner.hasNextLine()) {
 			token = scanner.nextLine();
 		}

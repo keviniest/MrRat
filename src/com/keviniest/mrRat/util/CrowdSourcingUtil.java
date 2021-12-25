@@ -15,9 +15,16 @@ public class CrowdSourcingUtil {
 	public static FileWriter writer;
 	public static String[] prep = { "on", "at", "inside", "in", "behind" };
 	public static String[] conj = { "and", "or", "but", "nor" };
-	private static final File NOUNS_LIST = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\resources\\MrRat\\data\\subjs.csv");
-	private static final File VERBS_LIST = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\resources\\MrRat\\data\\verbs.csv");
-	private static final File OBJS_LIST = new File("C:\\Users\\Kevin\\OneDrive\\Desktop\\Coding Projects\\MrRat\\resources\\MrRat\\data\\objs.csv");
+
+	private static String nounsFilePath = new File("").getAbsolutePath();
+	private static String verbsFilePath = new File("").getAbsolutePath();
+	private static String objsFilePath = new File("").getAbsolutePath();
+
+	public static void init() {
+		nounsFilePath = nounsFilePath.concat("\\resources\\MrRat\\data\\subjs.csv");
+		verbsFilePath = verbsFilePath.concat("\\resources\\MrRat\\data\\verbs.csv\\");
+		objsFilePath = objsFilePath.concat("\\resources\\MrRat\\data\\objs.csv");
+	}
 
 	/**
 	 * Saves words to corresponding CSV file
@@ -29,21 +36,21 @@ public class CrowdSourcingUtil {
 	public static void add(String type, String word, User user) {
 		if(type.equalsIgnoreCase("subj")) {
 			try {
-				writeCSV(NOUNS_LIST, word);
+				writeCSV(new File(nounsFilePath), word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
 		} else if(type.equalsIgnoreCase("verb")) {
 			try {
-				writeCSV(VERBS_LIST, word);
+				writeCSV(new File(verbsFilePath), word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
 		} else if(type.equalsIgnoreCase("obj")) {
 			try {
-				writeCSV(OBJS_LIST, word);
+				writeCSV(new File(objsFilePath), word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -66,15 +73,15 @@ public class CrowdSourcingUtil {
 		boolean isPrep = extended && random.nextBoolean();
 
 		//First word in sentence is capitalized logic
-		StringBuilder firstWord = new StringBuilder(readCSV(NOUNS_LIST, random.nextInt(NOUNS_LIST.toString().split(",").length)));
+		StringBuilder firstWord = new StringBuilder(readCSV(new File(nounsFilePath), random.nextInt(nounsFilePath.split(",").length)));
 		String firstLetter = firstWord.toString().split("")[0].toUpperCase();
 		firstWord = new StringBuilder(firstLetter + firstWord.delete(0, 1));
 
 		String sentence = firstWord
 				+ " "
-				+ readCSV(VERBS_LIST, random.nextInt(VERBS_LIST.toString().split(",").length))
+				+ readCSV(new File(verbsFilePath), random.nextInt(verbsFilePath.split(",").length))
 				+ " "
-				+ readCSV(OBJS_LIST, random.nextInt(OBJS_LIST.toString().split(",").length));
+				+ readCSV(new File(objsFilePath), random.nextInt(objsFilePath.split(",").length));
 
 		if(extended) {
 			if(isPrep) {
@@ -82,13 +89,13 @@ public class CrowdSourcingUtil {
 						+ " "
 						+ prep[random.nextInt(prep.length)]
 						+ " "
-						+ readCSV(OBJS_LIST, random.nextInt(OBJS_LIST.toString().split(",").length));
+						+ readCSV(new File(objsFilePath), random.nextInt(objsFilePath.split(",").length));
 			} else {
 				sentence = sentence
 						+ " "
 						+ conj[random.nextInt(conj.length)]
 						+ " "
-						+ readCSV(NOUNS_LIST, random.nextInt(NOUNS_LIST.toString().split(",").length));
+						+ readCSV(new File(nounsFilePath), random.nextInt(nounsFilePath.split(",").length));
 			}
 		}
 
