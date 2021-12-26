@@ -35,7 +35,6 @@ public class CrowdSourcingUtil {
 		nouns = new File("resources\\MrRat\\data\\subjs.csv");
 		try {
 			nouns.createNewFile();
-			System.out.println("Created file nouns");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
