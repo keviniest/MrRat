@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,14 +18,41 @@ public class CrowdSourcingUtil {
 	public static String[] prep = { "on", "at", "inside", "in", "behind" };
 	public static String[] conj = { "and", "or", "but", "nor" };
 
-	private static String nounsFilePath = new File("").getAbsolutePath();
-	private static String verbsFilePath = new File("").getAbsolutePath();
-	private static String objsFilePath = new File("").getAbsolutePath();
+	private static File nouns;
+	private static File verbs;
+	private static File objs;
 
 	public static void init() {
-		nounsFilePath = nounsFilePath.concat("\\resources\\MrRat\\data\\subjs.csv");
-		verbsFilePath = verbsFilePath.concat("\\resources\\MrRat\\data\\verbs.csv\\");
-		objsFilePath = objsFilePath.concat("\\resources\\MrRat\\data\\objs.csv");
+
+		// Creates resources folder on same directory as the jar file
+		try {
+			Files.createDirectories(Paths.get("resources\\MrRat\\data"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Creates CSV files
+		nouns = new File("resources\\MrRat\\data\\subjs.csv");
+		try {
+			nouns.createNewFile();
+			System.out.println("Created file nouns");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		verbs = new File("resources\\MrRat\\data\\verbs.csv");
+		try {
+			verbs.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		objs = new File("resources\\MrRat\\data\\objs.csv");
+		try {
+			objs.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -36,21 +65,21 @@ public class CrowdSourcingUtil {
 	public static void add(String type, String word, User user) {
 		if(type.equalsIgnoreCase("subj")) {
 			try {
-				writeCSV(new File(nounsFilePath), word);
+				writeCSV(nouns, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
 		} else if(type.equalsIgnoreCase("verb")) {
 			try {
-				writeCSV(new File(verbsFilePath), word);
+				writeCSV(verbs, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
 		} else if(type.equalsIgnoreCase("obj")) {
 			try {
-				writeCSV(new File(objsFilePath), word);
+				writeCSV(objs, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -73,15 +102,15 @@ public class CrowdSourcingUtil {
 		boolean isPrep = extended && random.nextBoolean();
 
 		//First word in sentence is capitalized logic
-		StringBuilder firstWord = new StringBuilder(readCSV(new File(nounsFilePath), random.nextInt(nounsFilePath.split(",").length)));
+		StringBuilder firstWord = new StringBuilder(readCSV(nouns, random.nextInt(nouns.toString().split(",").length)));
 		String firstLetter = firstWord.toString().split("")[0].toUpperCase();
 		firstWord = new StringBuilder(firstLetter + firstWord.delete(0, 1));
 
 		String sentence = firstWord
 				+ " "
-				+ readCSV(new File(verbsFilePath), random.nextInt(verbsFilePath.split(",").length))
+				+ readCSV(verbs, random.nextInt(verbs.toString().split(",").length))
 				+ " "
-				+ readCSV(new File(objsFilePath), random.nextInt(objsFilePath.split(",").length));
+				+ readCSV(objs, random.nextInt(objs.toString().split(",").length));
 
 		if(extended) {
 			if(isPrep) {
@@ -89,13 +118,13 @@ public class CrowdSourcingUtil {
 						+ " "
 						+ prep[random.nextInt(prep.length)]
 						+ " "
-						+ readCSV(new File(objsFilePath), random.nextInt(objsFilePath.split(",").length));
+						+ readCSV(objs, random.nextInt(objs.toString().split(",").length));
 			} else {
 				sentence = sentence
 						+ " "
 						+ conj[random.nextInt(conj.length)]
 						+ " "
-						+ readCSV(new File(nounsFilePath), random.nextInt(nounsFilePath.split(",").length));
+						+ readCSV(nouns, random.nextInt(nouns.toString().split(",").length));
 			}
 		}
 

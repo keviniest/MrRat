@@ -45,9 +45,8 @@ public class MrRat {
 	
 	private static String readToken() throws FileNotFoundException {
 		String token = "";
-		String file = new File("").getAbsolutePath();
-		file = file.concat("\\token.txt");
-		Scanner scanner = new Scanner(new File(file));
+		File file = new File("token.txt");
+		Scanner scanner = new Scanner(file);
 		while(scanner.hasNextLine()) {
 			token = scanner.nextLine();
 		}
