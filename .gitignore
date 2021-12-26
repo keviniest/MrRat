@@ -33,4 +33,6 @@ hs_err_pid*
 # The bot's authentication token
 token.txt
 
+resources/
+
 

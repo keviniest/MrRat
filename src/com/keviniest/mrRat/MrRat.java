@@ -25,10 +25,10 @@ public class MrRat {
 
 	public static void main(String[] args) throws LoginException, IOException {
 
-		if(args.length == 1) {
-			debug = args[0].equalsIgnoreCase("debug");
-		} else {
-			debug = false;
+		for(String s : args) {
+			if(s.equals("debug")) {
+				debug = true;
+			}
 		}
 
 		System.out.print((debug) ? "App started with debug mode\n" : "");
