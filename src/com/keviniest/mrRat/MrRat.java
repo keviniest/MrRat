@@ -35,7 +35,7 @@ public class MrRat {
 
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
-		jda.getPresence().setPresence(Activity.playing("cheese🧀"), true);
+		jda.getPresence().setPresence(Activity.playing("Cheese🧀"), true);
 
 		CrowdSourcingUtil.init();
 		jda.addEventListener(new CommandManager());
