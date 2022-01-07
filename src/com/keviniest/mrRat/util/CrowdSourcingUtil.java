@@ -26,27 +26,27 @@ public class CrowdSourcingUtil {
 
 		// Creates resources folder on same directory as the jar file
 		try {
-			Files.createDirectories(Paths.get("resources\\MrRat\\data"));
+			Files.createDirectories(Paths.get("resources/MrRat/data"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		// Creates CSV files
-		nouns = new File("resources\\MrRat\\data\\subjs.csv");
+		nouns = new File("resources/MrRat/data/subjs.csv");
 		try {
 			nouns.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		verbs = new File("resources\\MrRat\\data\\verbs.csv");
+		verbs = new File("resources/MrRat/data/verbs.csv");
 		try {
 			verbs.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		objs = new File("resources\\MrRat\\data\\objs.csv");
+		objs = new File("resources/MrRat/data/objs.csv");
 		try {
 			objs.createNewFile();
 		} catch (IOException e) {
