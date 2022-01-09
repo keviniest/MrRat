@@ -1,4 +1,4 @@
-package com.keviniest.mrRat.util;
+package com.keviniest.mrRat.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -131,7 +131,7 @@ public class CrowdSourcingUtil {
 		return sentence;
 	}
 
-	public static String readCSV(File type, int index) throws FileNotFoundException {
+	private static String readCSV(File type, int index) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
 		while(scan.hasNextLine()) {
@@ -142,7 +142,7 @@ public class CrowdSourcingUtil {
 		return wordList[index];
 	}
 
-	public static void writeCSV(File type, String word) throws IOException {
+	private static void writeCSV(File type, String word) throws IOException {
 		writer = new FileWriter(type, true);
 		writer.write(word + ",\n");
 		writer.close();

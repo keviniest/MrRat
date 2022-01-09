@@ -2,7 +2,7 @@ package com.keviniest.mrRat.commands.impl;
 
 import com.keviniest.mrRat.commands.Command;
 import com.keviniest.mrRat.commands.CommandManager;
-import com.keviniest.mrRat.util.CrowdSourcingUtil;
+import com.keviniest.mrRat.utils.CrowdSourcingUtil;
 
 import java.io.FileNotFoundException;
 

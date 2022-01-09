@@ -11,7 +11,7 @@ import com.keviniest.mrRat.commands.CommandManager;
 
 import com.keviniest.mrRat.events.GuildJoin;
 import com.keviniest.mrRat.events.MemberJoin;
-import com.keviniest.mrRat.util.CrowdSourcingUtil;
+import com.keviniest.mrRat.utils.CrowdSourcingUtil;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -19,28 +19,34 @@ import net.dv8tion.jda.api.entities.Activity;
 
 public class MrRat {
 
-	public static StringBuffer prefix = new StringBuffer("~");
 	public static JDA jda;
-	public static boolean debug;
+	public static StringBuffer prefix = new StringBuffer("~");
+	public static boolean debug = false;
+	public static boolean nolog = false;
 
 	public static void main(String[] args) throws LoginException, IOException {
 
 		for(String s : args) {
-			if(s.equals("debug")) {
+			if(s.equals("--debug")) {
 				debug = true;
+			} else if(s.equals("--no-log")) {
+				nolog = true;
 			}
 		}
 
 		System.out.print((debug) ? "App started with debug mode\n" : "");
+		System.out.print((nolog) ? "App started with nolog\n" : "");
 
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setPresence(Activity.playing("Cheese🧀"), true);
 
-		CrowdSourcingUtil.init();
 		jda.addEventListener(new CommandManager());
 		jda.addEventListener(new GuildJoin());
 		jda.addEventListener(new MemberJoin());
+
+		CrowdSourcingUtil.init();
+
 	}
 	
 	private static String readToken() throws FileNotFoundException {
