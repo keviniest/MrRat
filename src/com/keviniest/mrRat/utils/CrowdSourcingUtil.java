@@ -22,6 +22,7 @@ public class CrowdSourcingUtil {
 	private static File verbs;
 	private static File objs;
 
+	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public static void init() {
 
 		// Creates resources folder on same directory as the jar file
