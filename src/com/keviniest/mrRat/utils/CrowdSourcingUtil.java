@@ -101,15 +101,15 @@ public class CrowdSourcingUtil {
 		boolean isPrep = extended && random.nextBoolean();
 
 		//First word in sentence is capitalized logic
-		StringBuilder firstWord = new StringBuilder(readCSV(nouns, random.nextInt(nouns.toString().split(",").length)));
+		StringBuilder firstWord = new StringBuilder(readCSV(nouns, random.nextInt(readCSVAll(nouns).split(",").length)));
 		String firstLetter = firstWord.toString().split("")[0].toUpperCase();
 		firstWord = new StringBuilder(firstLetter + firstWord.delete(0, 1));
 
 		String sentence = firstWord
 				+ " "
-				+ readCSV(verbs, random.nextInt(verbs.toString().split(",").length))
+				+ readCSV(verbs, random.nextInt(readCSVAll(verbs).split(",").length))
 				+ " "
-				+ readCSV(objs, random.nextInt(objs.toString().split(",").length));
+				+ readCSV(objs, random.nextInt(readCSVAll(objs).split(",").length));
 
 		if(extended) {
 			if(isPrep) {
@@ -117,13 +117,13 @@ public class CrowdSourcingUtil {
 						+ " "
 						+ prep[random.nextInt(prep.length)]
 						+ " "
-						+ readCSV(objs, random.nextInt(objs.toString().split(",").length));
+						+ readCSV(objs, random.nextInt(readCSVAll(objs).split(",").length));
 			} else {
 				sentence = sentence
 						+ " "
 						+ conj[random.nextInt(conj.length)]
 						+ " "
-						+ readCSV(nouns, random.nextInt(nouns.toString().split(",").length));
+						+ readCSV(nouns, random.nextInt(readCSVAll(nouns).split(",").length));
 			}
 		}
 
@@ -146,6 +146,15 @@ public class CrowdSourcingUtil {
 		writer = new FileWriter(type, true);
 		writer.write(word + ",\n");
 		writer.close();
+	}
+
+	private static String readCSVAll(File type) throws FileNotFoundException {
+		StringBuilder word = new StringBuilder();
+		Scanner scan = new Scanner(type);
+		while(scan.hasNextLine()) {
+			word.append(scan.nextLine());
+		}
+		return word.toString();
 	}
 
 }
