@@ -89,7 +89,6 @@ public class CrowdSourcingUtil {
 			System.out.println(user + " added : " + word);
 			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
 		} else {
-			System.err.println("Wrong type was given (subj, verb, obj)");
 			CommandManager.event.getChannel().sendMessage("Wrong type was given (subj, verb, obj)").queue();
 		}
 	}

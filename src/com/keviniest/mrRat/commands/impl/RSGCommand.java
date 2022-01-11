@@ -16,7 +16,6 @@ public class RSGCommand extends Command {
     public void onCommand(String[] args, String command) {
         if(args[0].equalsIgnoreCase("add")) {
             CrowdSourcingUtil.add(args[1], args[2], CommandManager.event.getAuthor());
-            CommandManager.event.getChannel().sendMessage("Word Added!").queue();
         }
         else if(args[0].equalsIgnoreCase("print")) {
             try {
