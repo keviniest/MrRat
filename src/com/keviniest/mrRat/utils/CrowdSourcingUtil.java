@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.keviniest.mrRat.commands.CommandManager;
 import net.dv8tion.jda.api.entities.User;
 
 public class CrowdSourcingUtil {
@@ -70,6 +71,7 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
+			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
 		} else if(type.equalsIgnoreCase("verb")) {
 			try {
 				writeCSV(verbs, word);
@@ -77,6 +79,7 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
+			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
 		} else if(type.equalsIgnoreCase("obj")) {
 			try {
 				writeCSV(objs, word);
@@ -84,8 +87,10 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
+			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
 		} else {
-			System.err.println(" !!! Wrong type was given !!!");
+			System.err.println("Wrong type was given (subj, verb, obj)");
+			CommandManager.event.getChannel().sendMessage("Wrong type was given (subj, verb, obj)").queue();
 		}
 	}
 
@@ -96,6 +101,7 @@ public class CrowdSourcingUtil {
 	 * it would pick one random word from the subjects.
 	 * 
 	 * @return Randomly generated sentence using logic above
+	 * @throws FileNotFoundException When file is not found
 	 */
 	public static String randomSentence() throws FileNotFoundException {
 		boolean extended = random.nextBoolean();
@@ -132,6 +138,14 @@ public class CrowdSourcingUtil {
 		return sentence;
 	}
 
+	/**
+	 * Reads a word in given csv list index, in a given list of csv list.
+	 *
+	 * @param type Type of the word (subj, verb, obj) (.csv file)
+	 * @param index Index(position) of the word in the list
+	 * @return A word in the given csv list, the word is picked by given index.
+	 * @throws FileNotFoundException When file is not found
+	 */
 	private static String readCSV(File type, int index) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
@@ -143,12 +157,26 @@ public class CrowdSourcingUtil {
 		return wordList[index];
 	}
 
+	/**
+	 * Adds the given word to given csv list.
+	 *
+	 * @param type Type of the word (subj, verb, obj) (.csv file)
+	 * @param word The Word to be written.
+	 * @throws IOException When Something happens
+	 */
 	private static void writeCSV(File type, String word) throws IOException {
 		writer = new FileWriter(type, true);
 		writer.write(word + ",\n");
 		writer.close();
 	}
 
+	/**
+	 * Reads and returns string which is entirety of given csv list.
+	 *
+	 * @param type Type of the word (subj, verb, obj) (.csv file)
+	 * @return entirety of given csv file
+	 * @throws FileNotFoundException - When file is not found
+	 */
 	private static String readCSVAll(File type) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
