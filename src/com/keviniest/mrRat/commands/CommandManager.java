@@ -31,14 +31,16 @@ public class CommandManager extends ListenerAdapter {
         event = e;
 
         if(MrRat.debug) {
-            if(!event.getAuthor().toString().equalsIgnoreCase("U:Keviniest(682501040561848335)")) {
+            if(!event.getAuthor().toString().equals("U:Keviniest(682501040561848335)")) {
                 return;
             }
         }
 
-        if(!message.startsWith(String.valueOf(MrRat.prefix))) {
+        if(!message.startsWith(String.valueOf(MrRat.prefix)) || event.getAuthor().isBot()) {
             return;
         }
+
+
 
         message = message.substring(MrRat.prefix.length());
 
