@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
 
     @Override
     public void onCommand(String[] args, String command) {
-        CommandManager.event.getChannel().sendMessage("""
+        CommandManager.send("""
 					`help ... Prints this message`
 					`info ... Info about the bot`
 					`eatcheese ... Eats a cheese`
@@ -21,6 +21,6 @@ public class HelpCommand extends Command {
 					`setprefix <new prefix> ... changes bot prefix`
 					`rsg <action> <type> <word> ... use crowd sourcing to generate random sentence`
 					`For more info, check out` https://docs.google.com/document/d/1EfEFHPe7GSXM0OQ7xJ2NwToQv69DmAdN0vl8GHIw1_I/edit?usp=sharing\s
-					""").queue();
+					""");
     }
 }

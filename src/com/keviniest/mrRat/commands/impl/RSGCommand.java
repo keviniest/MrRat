@@ -19,15 +19,15 @@ public class RSGCommand extends Command {
         }
         else if(args[0].equalsIgnoreCase("print")) {
             try {
-                CommandManager.event.getChannel().sendMessage(CrowdSourcingUtil.randomSentence()).queue();
+                CommandManager.send(CrowdSourcingUtil.randomSentence());
             } catch (FileNotFoundException e) {
-                CommandManager.event.getChannel().sendMessage(e.toString()).queue();
+                CommandManager.send(e.toString());
             }
         }
         else {
-            CommandManager.event.getChannel().sendMessage("" +
+            CommandManager.send("" +
                     "❌Invalid option fed, check https://docs.google.com/document/d/1EfEFHPe7GSXM0OQ7xJ2NwToQv69DmAdN0vl8GHIw1_I/edit?usp=sharing%22" +
-                    "").queue();
+                    "");
         }
     }
 }

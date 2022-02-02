@@ -15,18 +15,18 @@ public class EatCheeseCommand extends Command {
 
         if(args.length == 0) {
             CommandManager.cheeseAte++;
-            CommandManager.event.getChannel().sendMessage("Total cheese ate : " + CommandManager.cheeseAte + "!").queue();
+            CommandManager.send("Total cheese ate : " + CommandManager.cheeseAte + "!");
         } else if(args.length == 1) {
             if(CommandManager.event.getAuthor().toString().equalsIgnoreCase("U:Keviniest(682501040561848335)")) {
                 CommandManager.cheeseAte = Long.parseLong(CommandManager.cheeseAte + args[0]);
-                CommandManager.event.getChannel().sendMessage("Total cheese ate : " + CommandManager.cheeseAte + "!").queue();
+                CommandManager.send("Total cheese ate : " + CommandManager.cheeseAte + "!");
             } else {
-                CommandManager.event.getChannel().sendMessage("Only Managers can do that").queue();
+                CommandManager.send("Only Managers can do that");
                 CommandManager.cheeseAte++;
-                CommandManager.event.getChannel().sendMessage("Total cheese ate : " + CommandManager.cheeseAte + "!").queue();
+                CommandManager.send("Total cheese ate : " + CommandManager.cheeseAte + "!");
             }
         } else {
-            CommandManager.event.getChannel().sendMessage("To many arguments given.").queue();
+            CommandManager.send("To many arguments given.");
         }
     }
 }

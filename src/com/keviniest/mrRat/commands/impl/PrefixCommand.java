@@ -12,6 +12,6 @@ public class PrefixCommand extends Command {
 
     @Override
     public void onCommand(String[] args, String command) {
-        CommandManager.event.getChannel().sendMessage("`" + MrRat.prefix + "` is the current prefix").queue();
+        CommandManager.send("`" + CommandManager.prefix + "` is the current prefix");
     }
 }

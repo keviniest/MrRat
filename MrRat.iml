@@ -15,8 +15,17 @@
     </content>
     <orderEntry type="jdk" jdkName="JavaSE-16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/JDA-5.0.0-alpha.4-withDependencies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library" exported="">
-      <library name="JDA-4.3.0_304-withDependencies.jar">
+      <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../JDA-4.3.0_304-withDependencies.jar!/" />
         </CLASSES>

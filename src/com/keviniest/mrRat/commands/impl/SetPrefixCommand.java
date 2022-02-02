@@ -13,11 +13,11 @@ public class SetPrefixCommand extends Command {
     @Override
     public void onCommand(String[] args, String command) {
         if(CommandManager.event.getAuthor().toString().equalsIgnoreCase("U:Keviniest(682501040561848335)")) {
-            MrRat.prefix.delete(0, MrRat.prefix.length());
-            MrRat.prefix.append(args[0]);
-            CommandManager.event.getChannel().sendMessage("`" + MrRat.prefix + "` is the new prefix").queue();
+            CommandManager.prefix.delete(0, CommandManager.prefix.length());
+            CommandManager.prefix.append(args[0]);
+            CommandManager.send("`" + CommandManager.prefix + "` is the new prefix");
         } else {
-            CommandManager.event.getChannel().sendMessage("❌You do not have permission to do that").queue();
+            CommandManager.send("❌You do not have permission to do that");
         }
     }
 }

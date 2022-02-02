@@ -12,17 +12,31 @@ import java.util.Scanner;
 import com.keviniest.mrRat.commands.CommandManager;
 import net.dv8tion.jda.api.entities.User;
 
+/**
+ * Custom CSV file reader/writer and random sentence generation function
+ * @author keviniest
+ */
 public class CrowdSourcingUtil {
 
 	public static Random random = new Random();
 	public static FileWriter writer;
+
+	/** List of prepositions */
 	public static String[] prep = { "on", "at", "inside", "in", "behind" };
+
+	/** List of conjunctions */
 	public static String[] conj = { "and", "or", "but", "nor" };
 
 	private static File nouns;
 	private static File verbs;
 	private static File objs;
 
+	/**
+	 * Initializes folders then creates .csv files on the correct location.
+	 *
+	 * File.createNewFile() returns true if file was successfully creates.
+	 * Since we don't really need this, it's annotated with @SuppressWarnings annotation.
+	 */
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public static void init() {
 
@@ -71,7 +85,7 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
+			CommandManager.send("Word Added!");
 		} else if(type.equalsIgnoreCase("verb")) {
 			try {
 				writeCSV(verbs, word);
@@ -79,7 +93,7 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
+			CommandManager.send("Word Added!");
 		} else if(type.equalsIgnoreCase("obj")) {
 			try {
 				writeCSV(objs, word);
@@ -87,9 +101,9 @@ public class CrowdSourcingUtil {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.event.getChannel().sendMessage("Word Added!").queue();
+			CommandManager.send("Word Added!");
 		} else {
-			CommandManager.event.getChannel().sendMessage("Wrong type was given (subj, verb, obj)").queue();
+			CommandManager.send("Wrong type was given (subj, verb, obj)");
 		}
 	}
 
@@ -103,33 +117,47 @@ public class CrowdSourcingUtil {
 	 * @throws FileNotFoundException When file is not found
 	 */
 	public static String randomSentence() throws FileNotFoundException {
+		// Decide if the sentence is simple or not
 		boolean extended = random.nextBoolean();
+
+		// Decides if the sentence is followed by prepositional phrase, if not, it's followed by a conjunctional phrase
 		boolean isPrep = extended && random.nextBoolean();
 
-		//First word in sentence is capitalized logic
-		StringBuilder firstWord = new StringBuilder(readCSV(nouns, random.nextInt(readCSVAll(nouns).split(",").length)));
+		// First word in sentence is capitalized logic
+		// A random word get picked here
+		StringBuilder firstWord = new StringBuilder(readCSV(nouns, random.nextInt(stringify(nouns).split(",").length)));
+
+		// The word gets splitted into letter by letter and get put into an array
+		// Then, the first item in the array (first letter of the word) gets capitalized
+		// firstLetter is the capitalized first letter of the picked word.
 		String firstLetter = firstWord.toString().split("")[0].toUpperCase();
+
+		// The capitalized first letter gets appended to the start of the originally picked word w/o the first letter
 		firstWord = new StringBuilder(firstLetter + firstWord.delete(0, 1));
 
 		String sentence = firstWord
 				+ " "
-				+ readCSV(verbs, random.nextInt(readCSVAll(verbs).split(",").length))
+				// Randomly picked verb from the list
+				+ readCSV(verbs, random.nextInt(stringify(verbs).split(",").length))
 				+ " "
-				+ readCSV(objs, random.nextInt(readCSVAll(objs).split(",").length));
+				// Randomly picked object from the list
+				+ readCSV(objs, random.nextInt(stringify(objs).split(",").length));
 
 		if(extended) {
 			if(isPrep) {
+				// Followed by prepositional phrase case
 				sentence = sentence
 						+ " "
 						+ prep[random.nextInt(prep.length)]
 						+ " "
-						+ readCSV(objs, random.nextInt(readCSVAll(objs).split(",").length));
+						+ readCSV(objs, random.nextInt(stringify(objs).split(",").length));
 			} else {
+				// Followed by conjunctional phrase case
 				sentence = sentence
 						+ " "
 						+ conj[random.nextInt(conj.length)]
 						+ " "
-						+ readCSV(nouns, random.nextInt(readCSVAll(nouns).split(",").length));
+						+ readCSV(nouns, random.nextInt(stringify(nouns).split(",").length));
 			}
 		}
 
@@ -170,13 +198,13 @@ public class CrowdSourcingUtil {
 	}
 
 	/**
-	 * Reads and returns string which is entirety of given csv list.
+	 * Reads and returns a string which is entirety of a given csv list.
 	 *
 	 * @param type Type of the word (subj, verb, obj) (.csv file)
 	 * @return entirety of given csv file
 	 * @throws FileNotFoundException - When file is not found
 	 */
-	private static String readCSVAll(File type) throws FileNotFoundException {
+	private static String stringify(File type) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
 		while(scan.hasNextLine()) {

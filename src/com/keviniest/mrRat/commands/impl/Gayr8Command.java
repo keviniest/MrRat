@@ -17,9 +17,9 @@ public class Gayr8Command extends Command {
         int howGay = rand.nextInt(100);
 
         if(args.length == 0) {
-            CommandManager.event.getChannel().sendMessage("You are " + howGay + "% gay.:rainbow_flag: ").queue();
+            CommandManager.send("You are " + howGay + "% gay.:rainbow_flag: ");
         } else {
-            CommandManager.event.getChannel().sendMessage(args[0]  + " is " + howGay + "% gay.:rainbow_flag: ").queue();
+            CommandManager.send(args[0]  + " is " + howGay + "% gay.:rainbow_flag: ");
         }
     }
 }

@@ -1,5 +1,9 @@
 package com.keviniest.mrRat.commands;
 
+/**
+ * Improved command handling system
+ * https://www.youtube.com/watch?v=o8fuBYUB6cI
+ */
 public abstract class Command {
 
     /**

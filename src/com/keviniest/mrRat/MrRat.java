@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.entities.Activity;
 public class MrRat {
 
 	public static JDA jda;
-	public static StringBuffer prefix = new StringBuffer("~");
 	public static boolean debug = false;
 	public static boolean nolog = false;
 
@@ -48,7 +47,12 @@ public class MrRat {
 		CrowdSourcingUtil.init();
 
 	}
-	
+
+	/**
+	 * Reads and returns last line of file named "token.txt" from the same directory as the jar file
+	 * @return last line of file named "token.txt"
+	 * @throws FileNotFoundException When "token.txt" is not found (must be in same location as the jar file)
+	 */
 	private static String readToken() throws FileNotFoundException {
 		String token = "";
 		File file = new File("token.txt");
