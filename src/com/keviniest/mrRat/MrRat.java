@@ -1,14 +1,6 @@
 package com.keviniest.mrRat;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-
-import javax.security.auth.login.LoginException;
-
 import com.keviniest.mrRat.commands.CommandManager;
-
 import com.keviniest.mrRat.events.GuildJoin;
 import com.keviniest.mrRat.events.MemberJoin;
 import com.keviniest.mrRat.utils.CrowdSourcingUtil;
@@ -16,6 +8,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+
+import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class MrRat {
 
@@ -25,16 +23,19 @@ public class MrRat {
 
 	public static void main(String[] args) throws LoginException, IOException {
 
-		for(String s : args) {
-			if(s.equals("--debug")) {
+		for (String s : args) {
+			if (s.equals("--debug")) {
 				debug = true;
-			} else if(s.equals("--no-log")) {
+			} else if (s.equals("--no-log")) {
 				nolog = true;
 			}
 		}
 
-		System.out.print((debug) ? "App started with debug mode\n" : "");
-		System.out.print((nolog) ? "App started with nolog\n" : "");
+		if (args.length != 0) {
+			for (String arg : args) {
+				System.out.println(arg);
+			}
+		}
 
 		jda = JDABuilder.createDefault(MrRat.readToken()).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
@@ -45,11 +46,11 @@ public class MrRat {
 		jda.addEventListener(new MemberJoin());
 
 		CrowdSourcingUtil.init();
-
 	}
 
 	/**
 	 * Reads and returns last line of file named "token.txt" from the same directory as the jar file
+	 *
 	 * @return last line of file named "token.txt"
 	 * @throws FileNotFoundException When "token.txt" is not found (must be in same location as the jar file)
 	 */
@@ -57,7 +58,7 @@ public class MrRat {
 		String token = "";
 		File file = new File("token.txt");
 		Scanner scanner = new Scanner(file);
-		while(scanner.hasNextLine()) {
+		while (scanner.hasNextLine()) {
 			token = scanner.nextLine();
 		}
 		scanner.close();

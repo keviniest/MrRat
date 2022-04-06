@@ -9,23 +9,25 @@ import java.nio.file.Paths;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.keviniest.mrRat.commands.CommandManager;
 import net.dv8tion.jda.api.entities.User;
 
 /**
  * Custom CSV file reader/writer and random sentence generation function
- * @author keviniest
  */
 public class CrowdSourcingUtil {
 
-	public static Random random = new Random();
+	private static final Random random = new Random();
 	public static FileWriter writer;
 
-	/** List of prepositions */
-	public static String[] prep = { "on", "at", "inside", "in", "behind" };
+	/**
+	 * List of prepositions
+	 */
+	private static final String[] prep = {"on", "at", "inside", "in", "behind"};
 
-	/** List of conjunctions */
-	public static String[] conj = { "and", "or", "but", "nor" };
+	/**
+	 * List of conjunctions
+	 */
+	private static final String[] conj = {"and", "or", "but", "nor"};
 
 	private static File nouns;
 	private static File verbs;
@@ -33,7 +35,7 @@ public class CrowdSourcingUtil {
 
 	/**
 	 * Initializes folders then creates .csv files on the correct location.
-	 *
+	 * <p>
 	 * File.createNewFile() returns true if file was successfully creates.
 	 * Since we don't really need this, it's annotated with @SuppressWarnings annotation.
 	 */
@@ -73,46 +75,47 @@ public class CrowdSourcingUtil {
 	/**
 	 * Saves words to corresponding CSV file
 	 *
+	 * @return true if word was successfully added, false is something went wrong
 	 * @param type type of the word (subj, verb, obj)
 	 * @param word the actual word to be added
 	 * @param user used for monitoring purpose. use .getAuthor() method
 	 */
-	public static void add(String type, String word, User user) {
-		if(type.equalsIgnoreCase("subj")) {
+	public static boolean add(String type, String word, User user) {
+		boolean status = false;
+		if (type.equalsIgnoreCase("subj")) {
 			try {
 				writeCSV(nouns, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.send("Word Added!");
-		} else if(type.equalsIgnoreCase("verb")) {
+			status = true;
+		} else if (type.equalsIgnoreCase("verb")) {
 			try {
 				writeCSV(verbs, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.send("Word Added!");
-		} else if(type.equalsIgnoreCase("obj")) {
+			status = true;
+		} else if (type.equalsIgnoreCase("obj")) {
 			try {
 				writeCSV(objs, word);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println(user + " added : " + word);
-			CommandManager.send("Word Added!");
-		} else {
-			CommandManager.send("Wrong type was given (subj, verb, obj)");
+			status = true;
 		}
+		return status;
 	}
 
 	/**
-	 * Base sentence is first generated using noun + verb + object format. 
+	 * Base sentence is first generated using noun + verb + object format.
 	 * After that, there is a chance that the sentence will follow with a preposition or a conjunction.
 	 * If it is followed by preposition, it would pick random word from objects, if it is conjunction,
 	 * it would pick one random word from the subjects.
-	 * 
+	 *
 	 * @return Randomly generated sentence using logic above
 	 * @throws FileNotFoundException When file is not found
 	 */
@@ -143,8 +146,8 @@ public class CrowdSourcingUtil {
 				// Randomly picked object from the list
 				+ readCSV(objs, random.nextInt(stringify(objs).split(",").length));
 
-		if(extended) {
-			if(isPrep) {
+		if (extended) {
+			if (isPrep) {
 				// Followed by prepositional phrase case
 				sentence = sentence
 						+ " "
@@ -168,7 +171,7 @@ public class CrowdSourcingUtil {
 	/**
 	 * Reads a word in given csv list index, in a given list of csv list.
 	 *
-	 * @param type Type of the word (subj, verb, obj) (.csv file)
+	 * @param type  Type of the word (subj, verb, obj) (.csv file)
 	 * @param index Index(position) of the word in the list
 	 * @return A word in the given csv list, the word is picked by given index.
 	 * @throws FileNotFoundException When file is not found
@@ -176,7 +179,7 @@ public class CrowdSourcingUtil {
 	private static String readCSV(File type, int index) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
-		while(scan.hasNextLine()) {
+		while (scan.hasNextLine()) {
 			word.append(scan.nextLine());
 		}
 		String[] wordList = word.toString().split(",");
@@ -207,7 +210,7 @@ public class CrowdSourcingUtil {
 	private static String stringify(File type) throws FileNotFoundException {
 		StringBuilder word = new StringBuilder();
 		Scanner scan = new Scanner(type);
-		while(scan.hasNextLine()) {
+		while (scan.hasNextLine()) {
 			word.append(scan.nextLine());
 		}
 		return word.toString();

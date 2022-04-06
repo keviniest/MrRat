@@ -1,27 +1,25 @@
 package com.keviniest.mrRat.commands;
 
-/**
- * Improved command handling system
- * https://www.youtube.com/watch?v=o8fuBYUB6cI
- */
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+
 public abstract class Command {
 
-    /**
-     * Short name (alias) of a command
-     */
-    public String name;
+	/**
+	 * Short name (alias) of a command
+	 */
+	public String name;
 
-    public Command(String name) {
-        this.name = name;
-    }
+	public Command(String name) {
+		this.name = name;
+	}
 
-    public abstract void onCommand(String[] args, String command);
+	public abstract void onCommand(String[] args, String command, GuildMessageReceivedEvent event);
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 }
